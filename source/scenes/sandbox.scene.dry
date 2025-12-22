@@ -9,17 +9,18 @@ go-to: sandbox_menu
 
 - @disable_end: Disable End In 1934
 - @enable_end: Enable End In 1934
+- @nat_rep_support: Increase/Decrease Repub Support/Nationalism
 - @free_agenda: clear your hand for free
 - @adopt_plan: Adopt any (or every) economic plan
 - @time_skip: Skip time 1 month at a time (doing it more than 1 month at a time may break the game)
 - @advisor_actions: Access options for advisors
-- @edit_hindenburg_angry: determines how angry hindenburg is at you
+- @edit_hindy_angry: determines how angry hindenburg is at you
 - @editresources: Edit Resources
 - @editbudget: Edit Budget
 - @editleftright: Edit Left/Right value of the DDP/DVP/LVP
-- @editcoaldissent: Edit Coalition Dissent
+- @coal_dis: Edit Coalition Dissent
 - @editstrife: Edit Strife (Maxing this lets you expand the reichsbanner without the center and liberal parties complaining)
-- @editcapitalstrike: Edit how close or far you are to a capital strike
+- @cap_strike: Edit how close or far you are to a capital strike
 - @editcoupprogress: Edit how close or far you are to a coup
 - @editdepression: Edit Inflation, Unemployment, and Economic Growth
 - @conciliators: MAKE SURE TO KEEP KPD RELATION ABOVE NEUTRAL AND LEFTIST STRENGTH ABOVE REFORM STRENGTH UNTIL THE EVENT FIRES IN JUNE (JULY?) 1929
@@ -39,23 +40,46 @@ go-to: sandbox_menu
 @disable_end
 view-if: end_disabled != 1
 on-arrival: end_disabled = 1
-go-to: breitscheid
+go-to: sandbox_menu
 
 The end date has been disabled.
 
 @enable_end
 view-if: end_disabled = 1
 on-arrival: end_disabled = 0
-go-to: breitscheid
+go-to: sandbox_menu
 
 The end date has been enabled.
 
+@nat_rep_support
+
+- @incr_rep: Increase Support for the Republic
+- @decr_rep: Decrease Support for the Republic
+- @incr_nat: Increase Nationalism
+- @decr_nat: Decrease Nationalism
+
+@incr_rep
+go-to: nat_rep_support
+on-arrival: pro_republic += 15;
+
+@decr_rep
+go-to: nat_rep_support
+on-arrival: pro_republic -= 15;
+
+@incr_nat
+go-to: nat_rep_support
+on-arrival: nationalism += 15;
+
+@decr_nat
+go-to: nat_rep_support
+on-arrival: nationalism -= 15;
+
 @conciliators
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: left_strength += 50; reformist_strength = 0; kpd_relation = 100; wittorf_soviet_union = 1
 
 @free_agenda
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: {!
 Q.advisor_action_timer = 6;
 if (Q.difficulty >= 0) {
@@ -74,23 +98,23 @@ if (Q.difficulty >= 0) {
 - @returnsandbox: return to sandbox
 
 @adopt_all
-go-to: breitscheid
+go-to: adopt_plan
 on-arrival: moderate_plan_adopted = 1; nationalization_plan = 1; wtb_adopted = 1
 
 @adopt_moderate
-go-to: breitscheid
+go-to: adopt_plan
 on-arrival: moderate_plan_adopted = 1
 
 @adopt_wtb
-go-to: breitscheid
-on-arrival: nationalization_plan = 1
-
-@adopt_left
-go-to: breitscheid
+go-to: adopt_plan
 on-arrival: wtb_adopted = 1
 
+@adopt_left
+go-to: adopt_plan
+on-arrival: nationalization_plan = 1
+
 @time_skip
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: month_actions += 1
 
 @advisor_actions
@@ -100,13 +124,13 @@ on-arrival: month_actions += 1
 - @returnsandbox: return to sandbox
 
 @nowait
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: advisor_action_timer = 0
 
 @placeholder
-go-to: breitscheid
+go-to: sandbox_menu
 
-@edit_hindenburg_angry
+@edit_hindy_angry
 
 - @maxangry: Hindenburg crashes out
 - @noangry: Hindenburg loves you
@@ -114,22 +138,22 @@ go-to: breitscheid
 - @lowerangry: Hindenburg is getting a little less angry
 
 @maxangry
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: hindenburg_angry = 120
 
 @noangry
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: hindenburg_angry = 0
 
 @raiseangry
-go-to: breitscheid
+go-to: edit_hindy_angry
 on-arrival: hindenburg_angry += 5
 
 @lowerangry
-go-to: breitscheid
+go-to: edit_hindy_angry
 on-arrival: hindenburg_angry -= 5
 
-@editcoaldissent
+@coal_dis
 
 - @maxcoaldissent: Raise Coalition Dissent to Very High
 - @removecoaldissent: Lower Coalition Dissent to Very Low
@@ -137,19 +161,19 @@ on-arrival: hindenburg_angry -= 5
 - @lowercoaldissent: Lower Coalition Dissent by 1 step
 
 @maxcoaldissent
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: coalition_dissent += 5
 
 @removecoaldissent
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: coalition_dissent = 0
 
 @raisecoaldissent
-go-to: breitscheid
+go-to: coal_dis
 on-arrival: coalition_dissent += 1
 
 @lowercoaldissent
-go-to: breitscheid
+go-to: coal_dis
 on-arrival: coalition_dissent -= 1
 
 @editstrife
@@ -161,22 +185,22 @@ on-arrival: coalition_dissent -= 1
 - @returnsandbox: return to sandbox
 
 @maxstrife
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: strife += 20
 
 @nostrife
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: strife = 0
 
 @raisestrife
-go-to: breitscheid
+go-to: editstrife
 on-arrival: strife += 1
 
 @lowerstrife
-go-to: breitscheid
+go-to: editstrife
 on-arrival: strife -= 1
 
-@editcapitalstrike
+@cap_strike
 
 - @maxcapstrike: Force the Capital Strike event to happen
 - @nocapstrike: Remove all progression to the Capital Strike event
@@ -186,25 +210,25 @@ on-arrival: strife -= 1
 - @returnsandbox: Return to sandbox menu
 
 @maxcapstrike
-go-to: breitscheid
-on-arrival: capital_strike_progress += 11
+go-to: sandbox_menu
+on-arrival: capital_strike_progress = 11
 
 @nocapstrike
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: capital_strike_progress = 0
 
 @raisecapstrike
-go-to: breitscheid
+go-to: cap_strike
 on-arrival: capital_strike_progress += 1
 
 @lowercapstrike
-go-to: breitscheid
+go-to: cap_strike
 on-arrival: capital_strike_progress -= 1
 
 @capstrikequery
+go-to: sandbox_menu
 
 [? if capital_strike_progress = 0: you have 0 capital strike progress ?][? if capital_strike__progress = 1: You have 1 capital strike progress ?][? if capital_strike__progress = 2: You have 2 capital strike progress ?][? if capital_strike__progress = 3: You have 3 capital strike progress ?][? if capital_strike__progress = 4: You have 4 capital strike progress ?][? if capital_strike_progress = 5: You have 5 capital strike progress ?][? if capital_strike_progress = 6: You have 6 capital strike progress ?][? if capital_strike_progress = 7: You have 7 capital strike progress ?][? if capital_strike__progress = 8: You have 8 capital strike progress, a capital strike is near ?][? if capital_strike__progress = 9: You have 9 capital strike progress, a capital strike is imminent ?][? if capital_strike_progress = 10: You have 10 capital strike progress, a capital strike is imminent ?]
-- @returnsandbox: return to sandbox
 
 @editcoupprogress
 
@@ -216,19 +240,19 @@ on-arrival: capital_strike_progress -= 1
 - @returnsandbox: Return to sandbox
 
 @maxcoupprog
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: coup_progress += 10
 
 @nocoupprog
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: coup_progress = 0
 
 @raisecoupprog
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: coup_progress += 1
 
 @lowercoupprog
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: coup_progress -= 1
 
 @querycoup
@@ -253,51 +277,51 @@ on-arrival: coup_progress -= 1
 - @returnsandbox: return to sandbox menu
 
 @add1inflation
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: inflation += 1
 
 @remove1inflation
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: inflation -= 1
 
 @add1unemployed
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: unemployed += 1
 
 @remove1unemployed
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: unemployed -= 1
 
 @add1ecogrow
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: economic_growth += 1
 
 @remove1ecogrow
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: economic_growth -= 1
 
 @add10inflation
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: inflation += 10
 
 @remove10inflation
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: inflation -= 10
 
 @add10unemployed
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: unemployed += 10
 
 @remove10unemployed
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: unemployed -= 10
 
 @add10ecogrow
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: economic_growth += 10
 
 @remove10ecogrow
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: economic_growth -= 10
 
 @editresources
@@ -311,7 +335,7 @@ on-arrival: economic_growth -= 10
 - @returnsandbox: Return To Sandbox
 
 @add10resources
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: {!
 Q.resources += 10;
 !}
@@ -319,7 +343,7 @@ Q.resources += 10;
 Added 10 resources to the party's stockpile.
 
 @add20resources
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: {!
 Q.resources += 20;
 !}
@@ -327,7 +351,7 @@ Q.resources += 20;
 Added 20 resources to the party's stockpile.
 
 @add100resources
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: {!
 Q.resources += 100;
 !}
@@ -335,7 +359,7 @@ Q.resources += 100;
 Added 100 resources to the party's stockpile, stop being greedy.
 
 @subtract10resources
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: {!
 Q.resources -= 10;
 !}
@@ -343,7 +367,7 @@ Q.resources -= 10;
 Removed 10 resources from the party's stockpile.
 
 @subtract20resources
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: {!
 Q.resources -= 20;
 !}
@@ -351,7 +375,7 @@ Q.resources -= 20;
 Removed 20 resources from the party's stockpile.
 
 @subtract100resources
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: {!
 Q.resources -= 100;
 !}
@@ -369,7 +393,7 @@ Removed 100 resources from the party's stockpile. This doesn't go to the homeles
 - @returnsandbox: Return To Sandbox
 
 @add10budget
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: {!
 Q.budget += 10;
 !}
@@ -377,7 +401,7 @@ Q.budget += 10;
 Added 10 budget to the country's stockpile.
 
 @add20budget
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: {!
 Q.budget += 20;
 !}
@@ -385,7 +409,7 @@ Q.budget += 20;
 Added 20 budget to the country's stockpile.
 
 @add100budget
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: {!
 Q.budget += 100;
 !}
@@ -393,7 +417,7 @@ Q.budget += 100;
 Added 100 budget to the country's stockpile, stop being greedy.
 
 @subtract10budget
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: {!
 Q.budget -= 10;
 !}
@@ -401,7 +425,7 @@ Q.budget -= 10;
 Removed 10 budget from the country's stockpile.
 
 @subtract20budget
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: {!
 Q.budget -= 20;
 !}
@@ -409,7 +433,7 @@ Q.budget -= 20;
 Removed 20 budget from the country's stockpile.
 
 @subtract100budget
-go-to: breitscheid
+go-to: sandbox_menu
 on-arrival: {!
 Q.budget -= 100;
 !}
@@ -965,7 +989,7 @@ Q.neorevisionist_strength = 0;
 Removed all neorevisionist strength.
 
 @returnsandbox
-go-to: breitscheid
+go-to: sandbox_menu
 
 @editironfront
 
