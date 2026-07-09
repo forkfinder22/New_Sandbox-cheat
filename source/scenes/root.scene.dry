@@ -11,7 +11,7 @@ go-to: start_menu_2
 @start_menu_2
 
 - @start_1: Start game
-- @modinfo: Mod Info - Last Updated 2026/01/25
+- @modinfo: Mod Info - Last Updated 2026/05/24
 - @credits: Credits
 - @game_over.achievements
 
@@ -1186,7 +1186,12 @@ const achievements = [
   "achievement_mr_breitscheid",
   "achievement_alt_aber_gold",
   "achievement_kleber_der_partei",
-  "achievement_grosse_sauberung"
+  "achievement_grosse_sauberung",
+  "achievement_die_rote_justiz",
+  "achievement_bruning_der_rotfrontkampfer",
+  "achievement_merz_und_scholz",
+  "achievement_lindner_moribund",
+  "achievement_tausendjahrige_libreich"
 ];
 
 Q.unlockedCount = achievements.filter(key => Q[key] === 1).length;

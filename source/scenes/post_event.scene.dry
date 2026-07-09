@@ -6,6 +6,10 @@ if (Q.social_patriot && Q.neorevisionism && !Q.left_split && !Q.centrists_resign
     this.achieve('das_grosste_aller_zelte');
 }
 
+if (Q.chancellor == "Brüning" && Q.nationalization_progress > 0 && Q.lautenbach_adopted == 1) {
+    this.achieve('bruning_der_rotfrontkampfer');
+}
+
 const q = dendryUI.dendryEngine.state.qualities;
 const dynamicMode = q.dynamic_mode;
 const historicalMode = q.historical_mode;

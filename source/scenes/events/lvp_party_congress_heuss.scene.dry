@@ -229,7 +229,7 @@ subtitle: Curtius was a member of the former <span style="color: #C0A054;">**DVP
 unavailable-subtitle: The right-industrial faction of the <span style="color: #FFCC00;">LVP</span> aren't the biggest fans of Curtius.
 choose-if: curtius_lead
 view-if: not curtius_resign_lvp and not (curtius_banking_crisis and banking_crisis_seen)
-on-arrival: lvp_relation += 3; lvp_left += 1; lvp_leader = "Curtius"; pro_republic += 3; new_middle_lvp += 2; old_middle_lvp += 4; ruarl_lvp += 2
+on-arrival: lvp_relation += 3; lvp_left += 1; lvp_leader = "Curtius"; pro_republic += 3; new_middle_lvp += 2; old_middle_lvp += 4; rural_lvp += 2
 face-image: img/portraits/curtius.jpg
 
 Julius Curtius, Stresemann's successor in foreign affairs and a former member of the <span style="color: #C0A054;">**DVP**</span>, has won the vote to succeed Luther for the chairmanship. Curtius is supported by the 'Pragmatic Center', and was put forth as a compromise candidate. 

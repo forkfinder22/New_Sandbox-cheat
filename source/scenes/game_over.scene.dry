@@ -168,7 +168,13 @@ if ((Q.dynamic_mode || Q.historical_mode || Q.difficulty == 1) && !((Q.year == 1
 
   const sortedParties = filteredPartySupport.sort((a, b) => b[1] - a[1]);
 
+  const thelargestparty = sortedParties[0]?.[0] ?? null;
+
   const secondLargestParty = sortedParties[1]?.[0] ?? null;
+
+  if (thelargestparty === 'lvp') {
+    Q.the_largest_party = 'lvp';
+  }
 
   if (secondLargestParty === 'dnvp') {
     Q.second_largest_party = 'dnvp';
@@ -343,6 +349,17 @@ if ((Q.dynamic_mode || Q.historical_mode || Q.difficulty == 1) && !((Q.year == 1
   }
   if (Q.prussian_police_loyalty >= 0.95 && Q.reichswehr_loyalty >= 0.95 && Q.interior_police_loyalty >= 0.95 && Q.judicial_reform >= 2 && Q.prussia_purge >= 2) {
     this.achieve('grosse_sauberung');
+  }
+  if (Q.judicial_reform >= 4 && Q.weltbuhne_dropped == 1 && Q.hitler_deported == 1 && Q.rohm_explode == 1 && Q.prussia_legal_returned == 1 && Q.rfb_banned == 1) {
+    this.achieve('die_rote_justiz');
+  }
+// Bruning der Rotfrontkampfer
+// Merz und Scholz
+  if (Q.lvp_r == 0 && Q.lvp_formed) {
+    this.achieve('lindner_moribund');
+  }
+  if (Q.the_largest_party == 'lvp') {
+    this.achieve('tausendjahrige_libreich');
   }
 }
 this.achieve('game_completed');
@@ -719,7 +736,12 @@ const achievements = [
   "achievement_mr_breitscheid",
   "achievement_alt_aber_gold",
   "achievement_kleber_der_partei",
-  "achievement_grosse_sauberung"
+  "achievement_grosse_sauberung",
+  "achievement_die_rote_justiz",
+  "achievement_bruning_der_rotfrontkampfer",
+  "achievement_merz_und_scholz",
+  "achievement_lindner_moribund",
+  "achievement_tausendjahrige_libreich"
 ];
 
 Q.unlockedCount = achievements.filter(key => Q[key] === 1).length;
@@ -2664,6 +2686,81 @@ All achievements require <span style="color: #0077FF;">dynamic</span>, <span sty
   {!</td>!}
 {!</tr>!}
 ?]
+
+[? if game_achievement_die_rote_justiz: 
+{!<tr>!}
+  {!<td style="width: 60px; height: 78px; vertical-align: middle; text-align: center; border: 2px solid #0077FF; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/die_rote_justiz.png" alt="Die Rote Justiz Icon"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #0077FF; background-color: rgba(128, 0, 0, 0.15);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Die Rote Justiz</div>
+      <div class="achievement_subtitle"> - fully reform the judiciary, ban the RfB, deport <span style="color: #7A3C00;">Hitler</span>, prosecute Ernst Rohm, drop the Weltbuhne case and win Prussia v. Reich.
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
+
+[? if game_achievement_bruning_der_rotfrontkampfer: 
+{!<tr>!}
+  {!<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #0077FF; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/bruning_der_rotfrontkampfer.png" alt="Brüning der Rotfrontkämpfer"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #0077FF; background-color: rgba(97, 24, 19, 0.2);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Brüning der Rotfrontkämpfer</div>
+      <div class="achievement_subtitle"> - both the Lautenbach and left plans have been implemented while Brüning is Chancellor.
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
+
+[? if game_achievement_merz_und_scholz: 
+{!<tr>!}
+  {!<td style="width: 60px; height: 78px; vertical-align: middle; text-align: center; border: 2px solid #0077FF; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/merz_und_scholz.png" alt="Merz und Scholz"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #0077FF; background-color: rgba(97, 24, 19, 0.2);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Merz und Scholz</div>
+      <div class="achievement_subtitle"> - form a <span style="color: #c00000;">Social</span>-<span style="color: #000000;">Christian</span> Coalition with the <i>true</i> <span style="color: #000000; font-weight: bold;">CVP</span> where the <span style="color: #c00000; font-weight: bold;">SPD</span> is junior partner and Brüning is Chancellor.
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
+
+[? if game_achievement_lindner_moribund: 
+{!<tr>!}
+  {!<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #0077FF; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/lindner_moribund.png" alt="Lindner Moribund"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #0077FF; background-color: rgba(97, 24, 19, 0.2);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Lindner Moribund</div>
+      <div class="achievement_subtitle"> - have the <span style="color: #FFCC00; font-weight: bold;">LVP</span> be formed but carry no seats in the Reichstag.
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
+
+[? if game_achievement_tausendjahrige_libreich: 
+{!<tr>!}
+  {!<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #0077FF; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/tausendjahrige_libreich.png" alt="Tausendjährige Libreich"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #0077FF; background-color: rgba(97, 24, 19, 0.2);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Tausendjährige Libreich</div>
+      <div class="achievement_subtitle"> - have the  <span style="color: #FFCC00; font-weight: bold;">LVP</span> become the largest party in the Reichstag.
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
 {!</table>!}
 
 = Completed Achievements Overall
@@ -4500,6 +4597,81 @@ All achievements require <span style="color: #0077FF;">dynamic</span>, <span sty
   {!</td>!}
 {!</tr>!}
 ?]
+
+[? if achievement_die_rote_justiz: 
+{!<tr>!}
+  {!<td style="width: 60px; height: 78px; vertical-align: middle; text-align: center; border: 2px solid #0077FF; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/die_rote_justiz.png" alt="Die Rote Justiz Icon"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #0077FF; background-color: rgba(128, 0, 0, 0.15);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Die Rote Justiz</div>
+      <div class="achievement_subtitle"> - fully reform the judiciary, ban the RfB, deport <span style="color: #7A3C00;">Hitler</span>, prosecute Ernst Rohm, drop the Weltbuhne case and win Prussia v. Reich.
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
+
+[? if achievement_bruning_der_rotfrontkampfer: 
+{!<tr>!}
+  {!<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #0077FF; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/bruning_der_rotfrontkampfer.png" alt="Brüning der Rotfrontkämpfer"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #0077FF; background-color: rgba(97, 24, 19, 0.2);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Brüning der Rotfrontkämpfer</div>
+      <div class="achievement_subtitle"> - both the Lautenbach and left plans have been implemented while Brüning is Chancellor.
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
+
+[? if achievement_merz_und_scholz: 
+{!<tr>!}
+  {!<td style="width: 60px; height: 78px; vertical-align: middle; text-align: center; border: 2px solid #0077FF; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/merz_und_scholz.png" alt="Merz und Scholz"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #0077FF; background-color: rgba(97, 24, 19, 0.2);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Merz und Scholz</div>
+      <div class="achievement_subtitle"> - form a <span style="color: #c00000;">Social</span>-<span style="color: #000000;">Christian</span> Coalition with the <i>true</i> <span style="color: #000000; font-weight: bold;">CVP</span> where the <span style="color: #c00000; font-weight: bold;">SPD</span> is junior partner and Brüning is Chancellor.
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
+
+[? if achievement_lindner_moribund: 
+{!<tr>!}
+  {!<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #0077FF; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/lindner_moribund.png" alt="Lindner Moribund"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #0077FF; background-color: rgba(97, 24, 19, 0.2);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Lindner Moribund</div>
+      <div class="achievement_subtitle"> - have the <span style="color: #FFCC00; font-weight: bold;">LVP</span> be formed but carry no seats in the Reichstag.
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
+
+[? if achievement_tausendjahrige_libreich: 
+{!<tr>!}
+  {!<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #0077FF; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/tausendjahrige_libreich.png" alt="Tausendjährige Libreich"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #0077FF; background-color: rgba(97, 24, 19, 0.2);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Tausendjährige Libreich</div>
+      <div class="achievement_subtitle"> - have the  <span style="color: #FFCC00; font-weight: bold;">LVP</span> become the largest party in the Reichstag.
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
 {!</table>!}
 
 = Incomplete Achievements
@@ -6331,6 +6503,81 @@ All achievements require <span style="color: #0077FF;">dynamic</span>, <span sty
     <div style="padding-left: 0.5em;">
       <div style="font-weight: bold;">Große Säuberung</div>
       <div class="achievement_subtitle"> - by the end of the game, completely reform the judiciary, purge the Prussian bureaucracy twice, and secure full loyalty from the Interior police, the Prussian police, and the Reichswehr.
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
+
+[? if not achievement_die_rote_justiz: 
+{!<tr>!}
+  {!<td style="width: 60px; height: 78px; vertical-align: middle; text-align: center; border: 2px solid #0077FF; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/die_rote_justiz.png" alt="Die Rote Justiz Icon"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #0077FF; background-color: rgba(128, 0, 0, 0.15);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Die Rote Justiz</div>
+      <div class="achievement_subtitle"> - fully reform the judiciary, ban the RfB, deport <span style="color: #7A3C00;">Hitler</span>, prosecute Ernst Rohm, drop the Weltbuhne case and win Prussia v. Reich.
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
+
+[? if not achievement_bruning_der_rotfrontkampfer: 
+{!<tr>!}
+  {!<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #0077FF; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/bruning_der_rotfrontkampfer.png" alt="Brüning der Rotfrontkämpfer"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #0077FF; background-color: rgba(97, 24, 19, 0.2);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Brüning der Rotfrontkämpfer</div>
+      <div class="achievement_subtitle"> - both the Lautenbach and left plans have been implemented while Brüning is Chancellor.
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
+
+[? if not achievement_merz_und_scholz: 
+{!<tr>!}
+  {!<td style="width: 60px; height: 78px; vertical-align: middle; text-align: center; border: 2px solid #0077FF; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/merz_und_scholz.png" alt="Merz und Scholz"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #0077FF; background-color: rgba(97, 24, 19, 0.2);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Merz und Scholz</div>
+      <div class="achievement_subtitle"> - form a <span style="color: #c00000;">Social</span>-<span style="color: #000000;">Christian</span> Coalition with the <i>true</i> <span style="color: #000000; font-weight: bold;">CVP</span> where the <span style="color: #c00000; font-weight: bold;">SPD</span> is junior partner and Brüning is Chancellor.
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
+
+[? if not achievement_lindner_moribund: 
+{!<tr>!}
+  {!<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #0077FF; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/lindner_moribund.png" alt="Lindner Moribund"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #0077FF; background-color: rgba(97, 24, 19, 0.2);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Lindner Moribund</div>
+      <div class="achievement_subtitle"> - have the <span style="color: #FFCC00; font-weight: bold;">LVP</span> be formed but carry no seats in the Reichstag.
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
+
+[? if not achievement_tausendjahrige_libreich: 
+{!<tr>!}
+  {!<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #0077FF; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/tausendjahrige_libreich.png" alt="Tausendjährige Libreich"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #0077FF; background-color: rgba(97, 24, 19, 0.2);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Tausendjährige Libreich</div>
+      <div class="achievement_subtitle"> - have the  <span style="color: #FFCC00; font-weight: bold;">LVP</span> become the largest party in the Reichstag.
     </div>
   {!</td>!}
 {!</tr>!}

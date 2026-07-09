@@ -211,7 +211,12 @@ on-arrival: {!
     "achievement_mr_breitscheid",
     "achievement_alt_aber_gold",
     "achievement_kleber_der_partei",
-    "achievement_grosse_sauberung"
+    "achievement_grosse_sauberung",
+    "achievement_die_rote_justiz",
+    "achievement_bruning_der_rotfrontkampfer",
+    "achievement_merz_und_scholz",
+    "achievement_lindner_moribund",
+    "achievement_tausendjahrige_libreich"
   ];
 
   Q.unlockedCount = achievements.filter(key => Q[key] === 1).length;
@@ -400,6 +405,16 @@ elements.forEach(el => {
 [? if not snoopy: - Neorevisionist faction strength and dissent are now displayed in the status. ?]
 
 [? if not snoopy: - Fixed a bug causing centrist and non-factional dissent decay reductions to not apply. ?]
+
+[? if not snoopy: - Other bug fixes. ?]
+
+**V1.06 - 2026/5/24**
+
+[? if not snoopy: - New achievements: "Der Rote Justiz", "Brüning der Rotfrontkämpfer", "Merz und Scholz", "Lindner Moribund" and "Tausendjährige Libreich". ?]
+
+[? if not snoopy: - Added Saxony Landtag Election in 1933. ?]
+
+[? if not snoopy: - Disconnected the discombobulator. ?]
 
 [? if not snoopy: - Other bug fixes. ?]
 
