@@ -821,7 +821,7 @@ Q.lvp_relation += 15;
 @decreaselvprel
 go-to: editrelations
 on-arrival: {!
-Q.lvp_relation += 15;
+Q.lvp_relation -= 15;
 !}
 
 @increasecenterrel
